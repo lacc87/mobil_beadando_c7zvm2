@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="unideb.hu.fakebookc7zvm2.ui.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_posts"
+            app:destination="@id/posts" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/posts"
+        android:name="unideb.hu.fakebookc7zvm2.ui.posts.Posts"
+        android:label="posts_fragment"
+        tools:layout="@layout/posts_fragment">
+        <argument
+            android:name="selectedUser"
+            app:argType="unideb.hu.fakebookc7zvm2.network.User" />
+    </fragment>
+
+</navigation>
