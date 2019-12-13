@@ -30,7 +30,7 @@ interface FakebookApiService {
             Deferred<List<User>>
 
     @GET("posts/{id}")
-    fun getPosts(@Path("id") id: Int?):
+    fun getPosts(@Path("id") id: String?):
             Deferred<List<Post>>
 }
 

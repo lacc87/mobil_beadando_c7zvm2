@@ -6,12 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import unideb.hu.fakebookc7zvm2.R
-import unideb.hu.fakebookc7zvm2.adapters.UserAdapter
-import unideb.hu.fakebookc7zvm2.databinding.MainFragmentBinding
 import unideb.hu.fakebookc7zvm2.databinding.PostsFragmentBinding
-import unideb.hu.fakebookc7zvm2.ui.main.MainFragmentDirections
 
 
 class Posts : Fragment() {
@@ -20,22 +16,28 @@ class Posts : Fragment() {
         fun newInstance() = Posts()
     }
 
-    private val viewModel: PostsViewModel by lazy {
-        ViewModelProviders.of(this).get(PostsViewModel::class.java)
-    }
+    private lateinit var viewModel: PostsViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+        val application = requireNotNull(activity).application
+
         val binding = PostsFragmentBinding.inflate(inflater)
 
+        val user = PostsArgs.fromBundle(arguments!!).selectedUser
+
         binding.setLifecycleOwner(this)
+
+        val viewModelFactory = PostsViewModelFactory(user, application)
+        binding.viewModel = ViewModelProviders.of(
+            this, viewModelFactory).get(PostsViewModel::class.java)
 
         binding.viewModel = viewModel
 
         return binding.root
     }
-
 
 }
