@@ -7,31 +7,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import unideb.hu.fakebookc7zvm2.R
+import unideb.hu.fakebookc7zvm2.adapters.PostAdapter
 import unideb.hu.fakebookc7zvm2.databinding.PostsFragmentBinding
+import unideb.hu.fakebookc7zvm2.ui.main.MainViewModel
+import java.util.logging.Logger
 
 
 class Posts : Fragment() {
 
-    private lateinit var viewModel: PostsViewModel
+    private val viewModel: PostsViewModel by lazy {
+        ViewModelProviders.of(this).get(PostsViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val application = requireNotNull(activity).application
-
         val binding = PostsFragmentBinding.inflate(inflater)
 
-        val user = PostsArgs.fromBundle(arguments!!).selectedUser
 
         binding.setLifecycleOwner(this)
 
-        val viewModelFactory = PostsViewModelFactory(user, application)
-        binding.viewModel = ViewModelProviders.of(
-            this, viewModelFactory).get(PostsViewModel::class.java)
+        val user = PostsArgs.fromBundle(arguments!!).selectedUser
+
+        viewModel.setUser(user)
 
         binding.viewModel = viewModel
+
+        binding.postList.adapter = PostAdapter( PostAdapter.OnClickListener {
+
+        } )
 
         return binding.root
     }

@@ -8,6 +8,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 private const val BASE_URL =
@@ -29,8 +30,8 @@ interface FakebookApiService {
     fun getUsers():
             Deferred<List<User>>
 
-    @GET("posts/{id}")
-    fun getPosts(@Path("id") id: String?):
+    @GET("posts")
+    fun getPosts(@Query("userId") userId: String):
             Deferred<List<Post>>
 }
 

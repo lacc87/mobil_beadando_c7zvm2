@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import unideb.hu.fakebookc7zvm2.databinding.PostItemBinding
-import unideb.hu.fakebookc7zvm2.databinding.UserItemBinding
 import unideb.hu.fakebookc7zvm2.network.Post
-import unideb.hu.fakebookc7zvm2.network.User
 
 class PostAdapter (private val onClickListener: OnClickListener) :
     ListAdapter<Post,

@@ -37,7 +37,7 @@ class MainViewModel : ViewModel() {
                 val listResult = getUsersDeffered.await()
                 _users.value = listResult
             } catch (e: Exception) {
-                _users.value = ArrayList()
+                _users.value = listOf<User>()
             }
         }
     }

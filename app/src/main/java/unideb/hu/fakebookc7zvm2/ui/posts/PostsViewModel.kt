@@ -12,8 +12,14 @@ import kotlinx.coroutines.launch
 import unideb.hu.fakebookc7zvm2.network.FakebookApi
 import unideb.hu.fakebookc7zvm2.network.Post
 import unideb.hu.fakebookc7zvm2.network.User
+import java.util.logging.Logger
 
-class PostsViewModel(user: User, app: Application) : AndroidViewModel(app) {
+class PostsViewModel : ViewModel() {
+
+    private val _user = MutableLiveData<User>()
+
+    val user: LiveData<User>
+        get() = _user
 
     private val _posts = MutableLiveData<List<Post>>()
 
@@ -25,12 +31,12 @@ class PostsViewModel(user: User, app: Application) : AndroidViewModel(app) {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getPosts(user)
+        getPosts()
     }
 
-    private fun getPosts(user: User) {
+    private fun getPosts() {
         coroutineScope.launch {
-            var getPostsDeffered = FakebookApi.retrofitService.getPosts(user.id)
+            var getPostsDeffered = FakebookApi.retrofitService.getPosts(user.value!!.id)
             try {
                 val listResult = getPostsDeffered.await()
                 _posts.value = listResult
@@ -38,6 +44,10 @@ class PostsViewModel(user: User, app: Application) : AndroidViewModel(app) {
                 _posts.value = ArrayList()
             }
         }
+    }
+
+    fun setUser(user: User) {
+        _user.value = user
     }
 
     override fun onCleared() {
