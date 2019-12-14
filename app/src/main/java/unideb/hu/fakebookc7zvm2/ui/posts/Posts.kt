@@ -12,10 +12,6 @@ import unideb.hu.fakebookc7zvm2.databinding.PostsFragmentBinding
 
 class Posts : Fragment() {
 
-    companion object {
-        fun newInstance() = Posts()
-    }
-
     private lateinit var viewModel: PostsViewModel
 
     override fun onCreateView(
