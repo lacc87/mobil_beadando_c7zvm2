@@ -13,7 +13,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context="unideb.hu.fakebookc7zvm2.ui.main.MainFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_list"

@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="unideb.hu.fakebookc7zvm2.ui.main.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment"
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_posts"
             app:destination="@id/posts" />
